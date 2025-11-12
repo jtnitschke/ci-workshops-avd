@@ -6,7 +6,11 @@ aaa_root:
 banners:
   motd: 'You shall not pass. Unless you are authorized. Then you shall pass.
 
-    EOF'
+    EOF
+
+    # Syslog
+
+    '
 config_end: true
 daemon_terminattr:
   cvaddrs:
@@ -97,6 +101,15 @@ local_users:
   sha512_password: $6$arista$AB0ex8gPAyCwOPUscai5asTwtecsrnD7RaIX2uO/jH.L/KTlkyLZJitCwqld3sRXUwciF0pkhooAxQe46OA8L0
   ssh_key: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCzLPe7fIA814JZOT0ZdR/8jY7YUsNY3zWehIBlKih73ybxX2UmVIYVoR7EV9JzNZ0DIBRpGD0IfOJmbID0P6tQtzksTtWY4UIkvNHed2xKAoNm9xAJWC0RPOwmNwiP/b6HDJ+WgoYE5QmHViXRLXB5VLSx+PO8+YO12yKk0lsIn+xxWCbNBPARqLW5t4Tr6uIMy9NrxTJrQU83htef7KWKNSiZTUdgYmwPS1rpRQ9+EWl/op3AyIurJ6jOfXFBxx1LklbiI1FInIbrhs0sA0kq7LgHK/w7WBTZftMx7b+3iV4+4U9Rcx+oDxTNpOaD7abPBSostXbVo5iq8wgACIJX
     arista@mckesson-training-14-114a6d93-eos
+logging:
+  vrfs:
+  - name: default
+    source_interface: Management0
+    hosts:
+    - name: 10.200.0.108
+      protocol: udp
+    - name: 10.200.1.108
+      protocol: udp
 loopback_interfaces:
 - name: Loopback0
   description: ROUTER_ID

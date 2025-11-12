@@ -4,41 +4,43 @@
 
 - [Management](#management)
   - [Banner](#banner)
-  - [Management Interfaces](#management-interfaces)
-  - [DNS Domain](#dns-domain)
-  - [IP Name Servers](#ip-name-servers)
-  - [Domain Lookup](#domain-lookup)
-  - [NTP](#ntp)
-  - [Management API HTTP](#management-api-http)
-- [Authentication](#authentication)
-  - [Local Users](#local-users)
-  - [Enable Password](#enable-password)
-  - [AAA Authorization](#aaa-authorization)
-- [Monitoring](#monitoring)
-  - [TerminAttr Daemon](#terminattr-daemon)
-- [Spanning Tree](#spanning-tree)
-  - [Spanning Tree Summary](#spanning-tree-summary)
-  - [Spanning Tree Device Configuration](#spanning-tree-device-configuration)
-- [Internal VLAN Allocation Policy](#internal-vlan-allocation-policy)
-  - [Internal VLAN Allocation Policy Summary](#internal-vlan-allocation-policy-summary)
-  - [Internal VLAN Allocation Policy Device Configuration](#internal-vlan-allocation-policy-device-configuration)
-- [Interfaces](#interfaces)
-  - [Ethernet Interfaces](#ethernet-interfaces)
-  - [Loopback Interfaces](#loopback-interfaces)
-- [Routing](#routing)
-  - [Service Routing Protocols Model](#service-routing-protocols-model)
-  - [IP Routing](#ip-routing)
-  - [IPv6 Routing](#ipv6-routing)
-  - [Static Routes](#static-routes)
-  - [Router BGP](#router-bgp)
-- [BFD](#bfd)
-  - [Router BFD](#router-bfd)
-- [Filters](#filters)
-  - [Prefix-lists](#prefix-lists)
-  - [Route-maps](#route-maps)
-- [VRF Instances](#vrf-instances)
-  - [VRF Instances Summary](#vrf-instances-summary)
-  - [VRF Instances Device Configuration](#vrf-instances-device-configuration)
+- [Syslog](#syslog)
+    - [Management Interfaces](#management-interfaces)
+    - [DNS Domain](#dns-domain)
+    - [IP Name Servers](#ip-name-servers)
+    - [Domain Lookup](#domain-lookup)
+    - [NTP](#ntp)
+    - [Management API HTTP](#management-api-http)
+  - [Authentication](#authentication)
+    - [Local Users](#local-users)
+    - [Enable Password](#enable-password)
+    - [AAA Authorization](#aaa-authorization)
+  - [Monitoring](#monitoring)
+    - [TerminAttr Daemon](#terminattr-daemon)
+    - [Logging](#logging)
+  - [Spanning Tree](#spanning-tree)
+    - [Spanning Tree Summary](#spanning-tree-summary)
+    - [Spanning Tree Device Configuration](#spanning-tree-device-configuration)
+  - [Internal VLAN Allocation Policy](#internal-vlan-allocation-policy)
+    - [Internal VLAN Allocation Policy Summary](#internal-vlan-allocation-policy-summary)
+    - [Internal VLAN Allocation Policy Device Configuration](#internal-vlan-allocation-policy-device-configuration)
+  - [Interfaces](#interfaces)
+    - [Ethernet Interfaces](#ethernet-interfaces)
+    - [Loopback Interfaces](#loopback-interfaces)
+  - [Routing](#routing)
+    - [Service Routing Protocols Model](#service-routing-protocols-model)
+    - [IP Routing](#ip-routing)
+    - [IPv6 Routing](#ipv6-routing)
+    - [Static Routes](#static-routes)
+    - [Router BGP](#router-bgp)
+  - [BFD](#bfd)
+    - [Router BFD](#router-bfd)
+  - [Filters](#filters)
+    - [Prefix-lists](#prefix-lists)
+    - [Route-maps](#route-maps)
+  - [VRF Instances](#vrf-instances)
+    - [VRF Instances Summary](#vrf-instances-summary)
+    - [VRF Instances Device Configuration](#vrf-instances-device-configuration)
 
 ## Management
 
@@ -49,6 +51,7 @@
 ```text
 You shall not pass. Unless you are authorized. Then you shall pass.
 EOF
+# Syslog
 ```
 
 ### Management Interfaces
@@ -222,6 +225,31 @@ aaa authorization exec default local
 daemon TerminAttr
    exec /usr/bin/TerminAttr -cvaddr=192.168.0.5:9910 -cvauth=token,/tmp/token -cvvrf=default -disableaaa -smashexcludes=ale,flexCounter,hardware,kni,pulse,strata -taillogs -cvsourceintf=Management0
    no shutdown
+```
+
+### Logging
+
+#### Logging Servers and Features Summary
+
+| Type | Level |
+| -----| ----- |
+
+| VRF | Source Interface |
+| --- | ---------------- |
+| default | Management0 |
+
+| VRF | Hosts | Ports | Protocol | SSL-profile |
+| --- | ----- | ----- | -------- | ----------- |
+| default | 10.200.0.108 | Default | UDP | - |
+| default | 10.200.1.108 | Default | UDP | - |
+
+#### Logging Servers and Features Device Configuration
+
+```eos
+!
+logging host 10.200.0.108
+logging host 10.200.1.108
+logging source-interface Management0
 ```
 
 ## Spanning Tree
